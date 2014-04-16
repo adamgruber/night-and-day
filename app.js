@@ -9,6 +9,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var less = require('less-middleware');
 
 var app = express();
 var bootstrapPath = path.join(__dirname, 'node_modules', 'bootstrap');
@@ -25,13 +26,24 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(require('less-middleware')({
-  src    : path.join(__dirname, 'assets', 'less'),
-  paths  : [path.join(bootstrapPath, 'less')],
-  dest   : path.join(__dirname, 'public', 'stylesheets'),
-  prefix : '/stylesheets',
+
+// Less Middleware
+var lessSrc = path.join(__dirname, 'assets', 'less');
+var lessMwOpts = {
+  dest: path.join(__dirname, 'public', 'stylesheets'),
+  preprocess: {
+    path: function(pathname, req) {
+      return pathname.replace('/stylesheets', '');
+    }
+  }
+};
+var lessParserOpts = {
+  paths: [path.join(bootstrapPath, 'less')],
   debug: true
-}));
+};
+var lessCompilerOpts = {};
+
+app.use(less(lessSrc, lessMwOpts, lessParserOpts, lessCompilerOpts));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
