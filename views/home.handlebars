@@ -1,7 +1,7 @@
 <h1>Example App: Home</h1>
 <p>Welcome to {{title}}</p>
-{{#times}}
 <ul>
-  <li>{{solarNoon}}</li>
+{{#each times}}
+  <li>{{@key}}: {{this}}</li>
+{{/each}}
 </ul>
-{{/times}}

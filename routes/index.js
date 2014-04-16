@@ -4,10 +4,9 @@ var SunCalc = require('suncalc');
  */
 // get today's sunlight times for London
 var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
-console.log(times);
 exports.index = function(req, res){
   res.render('home', {
-  	title: 'Express',
-  	times: times
+    title: 'Express',
+    times: times
   });
 };

@@ -11,6 +11,8 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+var bootstrapPath = path.join(__dirname, 'node_modules', 'bootstrap');
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 
 // all environments
@@ -23,7 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
+app.use(require('less-middleware')({
+  src    : path.join(__dirname, 'assets', 'less'),
+  paths  : [path.join(bootstrapPath, 'less')],
+  dest   : path.join(__dirname, 'public', 'stylesheets'),
+  prefix : '/stylesheets',
+  debug: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
