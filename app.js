@@ -30,18 +30,20 @@ app.use(app.router);
 // Less Middleware
 var lessSrc = path.join(__dirname, 'assets', 'less');
 var lessMwOpts = {
-  dest: path.join(__dirname, 'public', 'stylesheets'),
+  dest: path.join(__dirname, 'public'),
   preprocess: {
     path: function(pathname, req) {
+      console.log(pathname);
       return pathname.replace('/stylesheets', '');
     }
   }
 };
 var lessParserOpts = {
-  paths: [path.join(bootstrapPath, 'less')],
-  debug: true
+  paths: [path.join(bootstrapPath, 'less')]
 };
-var lessCompilerOpts = {};
+var lessCompilerOpts = {
+  compress: false
+};
 
 app.use(less(lessSrc, lessMwOpts, lessParserOpts, lessCompilerOpts));
 app.use(express.static(path.join(__dirname, 'public')));
