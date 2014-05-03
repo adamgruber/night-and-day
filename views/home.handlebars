@@ -1,7 +1,18 @@
-<h1>Example App: Home</h1>
-<p>Welcome to {{title}}</p>
-<ul>
-{{#each times}}
-  <li>{{@key}}: {{this}}</li>
-{{/each}}
-</ul>
+<div class="col-xs-12">
+  <h1>Night and Day</h1>
+  <p>Your location: <span id="location">calculating&hellip;</span><p>
+  <div class="col-sm-4">
+    <p>Here are your sun times:</p>
+    <ul id="sunTimesList" class="list-unstyled"></ul>
+  </div>
+  <div class="col-sm-4">
+    <p>Current sun position:</p>
+    <ul id="sunPosList" class="list-unstyled"></ul>
+  </div>
+  <div class="col-sm-4">
+    <p>Current moon position:</p>
+    <ul id="moonPosList" class="list-unstyled"></ul>
+    <p>Current moon illumination:<p>
+    <ul id="moonIllumList" class="list-unstyled"></ul>
+  </div>
+</div>

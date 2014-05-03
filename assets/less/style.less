@@ -1,5 +1,7 @@
 @import "bootstrap";
 
+@footerHeight: 70px;
+
 @tod: `new Date().getHours()`;
 
 .bgCol() when (@tod > 12) {
@@ -11,11 +13,33 @@
 
 
 body {
-  padding: 50px;
-  font: 19px "Lucida Grande", Helvetica, Arial, sans-serif;
-  .bgCol();
+  background-color: rgb(160, 209, 224)
 }
 
 a {
   color: #00B7FF;
+}
+
+.ground {
+  background-color: rgb(112, 71, 19);
+  border-top: 10px solid rgb(30, 138, 25);
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: @footerHeight;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: @footerHeight;
 }
